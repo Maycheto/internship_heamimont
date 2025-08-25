@@ -1,0 +1,153 @@
+.homepage {
+  font-family: system-ui, -apple-system, Podkova, Podkova, Podkova, Podkova, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0a0a0a;
+  background: #ffffff;
+}
+
+.grid-ghost {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 110px 100%, 100% 110px;
+  opacity: 0; 
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 24px 56px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #ffffff;
+}
+
+.logo {
+  justify-self: start;
+  font-weight: 700;
+  font-size: 22px;
+  color: #33ce7d;
+}
+
+.nav {
+  justify-self: center;
+  display: flex;
+  gap: 40px;
+}
+
+.nav a {
+  color: #0a0a0a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.actions {
+  justify-self: end;
+  display: flex;
+  gap: 14px;
+}
+
+.btn {
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+}
+
+.btn-outline {
+  background: #ffffff;
+  color: #33ce7d;
+  border-color: #33ce7d;
+}
+
+.btn-solid {
+  background: #33ce7d;
+  color: #ffffff;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: calc(100vh - 90px);
+  padding: 80px 56px;
+  overflow: hidden;
+}
+
+.hero-left {
+  position: relative;
+}
+
+.pink-circle {
+  position: absolute;
+  left: -160px;
+  top: -310px;
+  width: 820px;
+  height: 820px;
+  background: #f2a1c7;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.headline {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  font-size: 56px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #0a0a0a;
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.highlight-bg {
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: 55%;
+  height: 52%;
+  transform: translateY(-50%);
+  background: #33ce7d;
+  border-radius: 6px;
+  z-index: -1;
+}
+
+.highlight-text {
+  position: relative;
+}
+
+.hero-right {
+  display: flex;
+  justify-content: center;
+}
+
+.image-circle {
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.image-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 1280px) {
+  .hero { padding: 100px 80px; }
+  .headline { font-size: 64px; max-width: 760px; }
+  .image-circle { width: 620px; height: 620px; }
+} 
