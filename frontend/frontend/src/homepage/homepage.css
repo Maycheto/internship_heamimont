@@ -48,6 +48,8 @@
   font-family: "Podkova", serif;
 }
 
+
+
 .actions {
   justify-self: end;
   display: flex;
@@ -67,22 +69,32 @@
 
 .btn:active { transform: scale(0.98); }
 
-.btn-outline {
+.btn-outline {/* sign up */
   background: #ffffff;
   color: #33ce7d;
   border-color: #33ce7d;
 }
 
-.btn-solid {
+.btn-solid {/* log in */
   background: #33ce7d;
   color: #ffffff;
 }
 
-.btn-learn {
-  margin-top: 24px;
-  background: #ffffff;
-  color: #0a0a0a;
-  border: 2px solid #d0a9bd;
+.btn-learn {/*learn more btn*/
+  font-size: 30px;
+  width: 240px;
+  height: 70px;
+  position: relative;
+  top: -135px;
+  right: -70px;
+  background: #59213e;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.btn-learn:hover {
+  background: #8a2b5e;
+  box-shadow: 0 8px 20px rgba(138,43,94,0.3);
 }
 
 .hero {
@@ -110,11 +122,12 @@
   z-index: 0;
 }
 
-.headline {
+.headline {/*protecting...*/
   position: relative;
   z-index: 1;
   max-width: 620px;
-  font-size: 56px;
+  top: -140px;
+  font-size: 80px;
   line-height: 1.1;
   font-weight: 800;
   color: #0a0a0a;
@@ -147,6 +160,8 @@
 .image-circle {
   width: 560px;
   height: 560px;
+  top: -40px;
+  right: -40px;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0,0,0,0.12);
@@ -180,7 +195,7 @@
   background-image: radial-gradient(#c62d70 var(--dot-size), transparent var(--dot-size));
   background-size: calc(var(--dot-size) + var(--gap)) 100%;
   opacity: 0.7;
-  animation: moveDots 2s linear infinite;
+  animation: moveDots 6s linear infinite;
   pointer-events: none;
 }
 
@@ -196,6 +211,8 @@
 
 .wave {
   height: 40px;
+  width: 100%;
+  margin-top: 40px;
   background: repeating-linear-gradient(90deg, #c62d70 0 80px, #33ce7d 80px 160px, #8bcf8f 160px 240px, #33ce7d 240px 320px);
   clip-path: path("M0,12 C80,0 160,24 240,12 S400,0 480,12 640,24 720,12 880,0 960,12 1120,24 1200,12 V22 H0 Z");
 }

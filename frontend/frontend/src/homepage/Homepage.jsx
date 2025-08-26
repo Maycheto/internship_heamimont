@@ -45,7 +45,7 @@ function Homepage() {
 
         <div className="hero-right">
           <div className="image-circle float">
-            <img src="https://images.pexels.com/photos/7731330/pexels-photo-7731330.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
+            <img src="https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg" />
           </div>
         </div>
       </main>
@@ -68,7 +68,7 @@ function Homepage() {
 
         <div className="service service-a">
           <div className="service-media">
-            <img src="https://images.pexels.com/photos/7731330/pexels-photo-7731330.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Family outdoors" />
+            <img src="https://images.pexels.com/photos/620530/pexels-photo-620530.jpeg"/>
             <div className="service-chip">Personal Insurance</div>
           </div>
           <div className="service-copy">
@@ -97,7 +97,7 @@ function Homepage() {
         <div className="service service-c">
           <div className="service-media">
             <img
-              src="https://images.unsplash.com/photo-1526404428533-3326f1f3d7f4?q=80&w=1470&auto=format&fit=crop"
+              src="https://images.pexels.com/photos/11895978/pexels-photo-11895978.jpeg"
               alt="Modern building"
             />
           </div>
