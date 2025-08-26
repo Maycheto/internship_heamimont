@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "backend_a29b384a"
+    },
+    {
+      "type": "java",
+      "name": "Run Main with SQLite",
+      "request": "launch",
+      "mainClass": "Main",
+      "classPaths": [
+        "${workspaceFolder}/sqlite-jdbc-3.50.3.0.jar",
+        "${workspaceFolder}"
+      ],
+      "projectName": "backend"
+    }
+  ]
+}
