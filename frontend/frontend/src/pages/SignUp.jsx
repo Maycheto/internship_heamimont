@@ -9,6 +9,7 @@ export default function Signup() {
     <div className="signup-container">
       <div className="geometric-shape-1"></div>
       <div className="geometric-shape-2"></div>
+        
 
       <div className="header">
         <button className="back-button">

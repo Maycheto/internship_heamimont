@@ -8,32 +8,18 @@
 
 body {
   font-family: "Podkova";
-  background: linear-gradient(135deg, hsl(330, 100%, 85%) 0%, hsl(330, 100%, 75%) 100%);
+  background: #F3A1C7;
   min-height: 100vh;
 }
 
-/* Main container with geometric background */
-.signup-container {
-  min-height: 100vh;
-  font: 20px "Podkova";
-  background: linear-gradient(135deg, hsl(330, 100%, 85%) 0%, hsl(330, 100%, 75%) 100%);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-/* Geometric background shapes */
+/* background*/
 .signup-container::before,
 .signup-container::after {
   content: '';
   position: absolute;
-  border: 3px solid hsl(330, 25%, 15%);
+  border: 3px solid #59213E;
 }
 
-/* White card in the center (matches reference proportions) */
 .signup-container {
   width: 1025px;
   height: 852px;
@@ -41,24 +27,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #ffffff;
+  background: #F3A1C7;
   border-radius: 32px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.5);
   min-height: unset;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Additional geometric shapes */
+/*квадрати отзад */
 .geometric-shape-1 {
   position: absolute;
   top: 20%;
   right: 10%;
   width: 100px;
   height: 100px;
-  border: 3px solid hsl(330, 25%, 15%);
+  border: 3px solid #59213E;
   transform: rotate(45deg);
   border-radius: 10px;
 }
@@ -69,7 +53,7 @@ body {
   left: 8%;
   width: 80px;
   height: 120px;
-  border: 3px solid hsl(330, 25%, 15%);
+  border: 3px solid #59213E;
   transform: rotate(-30deg);
   border-radius: 25px;
 }
@@ -98,7 +82,7 @@ body {
 }
 
 .back-button:hover {
-  color: hsl(330, 25%, 15%);
+  color: #59213E;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -109,7 +93,6 @@ body {
   font-size: 24px;
 }
 
-/* Main form card */
 .signup-card {
   background: #ffffff;
   border-radius: 28px;
@@ -120,7 +103,6 @@ body {
   z-index: 10;
 }
 
-/* Inner bordered panel around the form like the reference */
 .signup-card::before {
   content: '';
   position: absolute;
@@ -130,7 +112,6 @@ body {
   pointer-events: none;
 }
 
-/* Header section */
 .form-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -152,7 +133,6 @@ body {
   font-weight: 700;
 }
 
-/* Accent underline for subtitle */
 .form-subtitle::after {
   content: '';
   position: absolute;
@@ -165,21 +145,18 @@ body {
   border-radius: 2px;
 }
 
-/* Form styles */
 .signup-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* Name fields row */
 .name-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
 }
 
-/* Input field styling */
 .form-input {
   width: 100%;
   height: 52px;
@@ -202,7 +179,6 @@ body {
   box-shadow: 0 0 0 0 rgba(0,0,0,0);
 }
 
-/* Password input container */
 .password-container {
   position: relative;
 }
@@ -224,7 +200,6 @@ body {
   color: hsl(330, 25%, 25%);
 }
 
-/* Checkbox section */
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -235,7 +210,7 @@ body {
 .checkbox {
   width: 18px;
   height: 18px;
-  border: 2px solid hsl(330, 25%, 30%);
+  border: 2px solid #59213E;
   border-radius: 4px;
   background: #ffffff;
   cursor: pointer;
@@ -243,8 +218,8 @@ body {
 }
 
 .checkbox:checked {
-  background: hsl(330, 60%, 40%);
-  border-color: hsl(330, 60%, 40%);
+  background: #59213E;
+  border-color: #59213E;
 }
 
 .checkbox:checked::after {
@@ -264,7 +239,6 @@ body {
   cursor: pointer;
 }
 
-/* Submit button */
 .submit-button {
   width: 320px;
   align-self: center;
@@ -285,7 +259,6 @@ body {
   box-shadow: 0 12px 30px -6px hsl(330deg 60% 30% / 35%);
 }
 
-/* Login link section */
 .login-link-container {
   text-align: center;
   margin-top: 1rem;
@@ -307,7 +280,6 @@ body {
   color: hsl(165, 100%, 50%);
 }
 
-/* Responsive design */
 @media (max-width: 640px) {
   .signup-card {
     padding: 32px 24px;
@@ -328,7 +300,7 @@ body {
   }
 }
 
-/* Icon styles (you can replace with actual SVG icons) */
+
 .icon {
   width: 1.25rem;
   height: 1.25rem;
