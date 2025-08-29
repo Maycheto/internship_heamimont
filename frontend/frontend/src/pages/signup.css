@@ -1,0 +1,341 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Podkova";
+  background: linear-gradient(135deg, hsl(330, 100%, 85%) 0%, hsl(330, 100%, 75%) 100%);
+  min-height: 100vh;
+}
+
+/* Main container with geometric background */
+.signup-container {
+  min-height: 100vh;
+  font: 20px "Podkova";
+  background: linear-gradient(135deg, hsl(330, 100%, 85%) 0%, hsl(330, 100%, 75%) 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Geometric background shapes */
+.signup-container::before,
+.signup-container::after {
+  content: '';
+  position: absolute;
+  border: 3px solid hsl(330, 25%, 15%);
+}
+
+.signup-container {
+  width: 1025px;
+  height: 852px;
+
+  /* Center it */
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Styling */
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  /* Remove full-screen stuff */
+  min-height: unset;
+  display: flex;         /* optional, for centering contents inside */
+  align-items: center;   /* optional */
+  justify-content: center; /* optional */
+}
+
+/* Additional geometric shapes */
+.geometric-shape-1 {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 100px;
+  height: 100px;
+  border: 3px solid hsl(330, 25%, 15%);
+  transform: rotate(45deg);
+  border-radius: 10px;
+}
+
+.geometric-shape-2 {
+  position: absolute;
+  bottom: 30%;
+  left: 8%;
+  width: 80px;
+  height: 120px;
+  border: 3px solid hsl(330, 25%, 15%);
+  transform: rotate(-30deg);
+  border-radius: 25px;
+}
+
+.header {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: hsl(330, 25%, 25%);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button:hover {
+  color: hsl(330, 25%, 15%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header-text {
+  margin-left: 0.75rem;
+  color: hsl(330, 25%, 30%);
+  font-weight: 500;
+}
+
+/* Main form card */
+.signup-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 28rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header section */
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: hsl(330, 25%, 25%);
+  margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+  font-size: 1.125rem;
+  color: hsl(330, 10%, 60%);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+/* Accent underline for subtitle */
+.form-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(165, 100%, 60%) 0%, hsl(165, 100%, 60%) 100%);
+  border-radius: 2px;
+}
+
+/* Form styles */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Name fields row */
+.name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Input field styling */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid hsl(330, 20%, 80%);
+  border-radius: 9999px;
+  color: hsl(330, 25%, 25%);
+  font-size: 1rem;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: hsl(330, 10%, 60%);
+}
+
+.form-input:focus {
+  border-color: hsl(330, 60%, 40%);
+  box-shadow: 0 0 0 2px hsl(330, 60%, 40%, 0.2);
+}
+
+/* Password input container */
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: hsl(330, 10%, 60%);
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.password-toggle:hover {
+  color: hsl(330, 25%, 25%);
+}
+
+/* Checkbox section */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid hsl(330, 20%, 80%);
+  border-radius: 0.25rem;
+  background: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox:checked {
+  background: hsl(330, 60%, 40%);
+  border-color: hsl(330, 60%, 40%);
+}
+
+.checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.checkbox-label {
+  font-size: 0.875rem;
+  color: hsl(330, 10%, 60%);
+  cursor: pointer;
+}
+
+/* Submit button */
+.submit-button {
+  width: 100%;
+  background: hsl(330, 60%, 40%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1.5rem;
+}
+
+.submit-button:hover {
+  background: hsl(330, 60%, 35%);
+  box-shadow: 0 10px 25px -5px hsl(330, 60%, 40%, 0.3);
+}
+
+/* Login link section */
+.login-link-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-text {
+  color: hsl(330, 10%, 60%);
+  font-size: 0.875rem;
+}
+
+.login-link {
+  color: hsl(165, 100%, 60%);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.login-link:hover {
+  color: hsl(165, 100%, 50%);
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .signup-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .name-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-subtitle::after {
+    width: 150px;
+  }
+  
+  .geometric-shape-1,
+  .geometric-shape-2 {
+    display: none;
+  }
+}
+
+/* Icon styles (you can replace with actual SVG icons) */
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+}
+
+.eye-icon::before {
+  content: '👁';
+  font-size: 1rem;
+}
+
+.eye-off-icon::before {
+  content: '👁‍🗨';
+  font-size: 1rem;
+}
+
+.arrow-left-icon::before {
+  content: '←';
+  font-size: 1.25rem;
+}

@@ -66,6 +66,7 @@ function Homepage() {
       <section className="services" id="services">
         <h2 className="services-title">Our Services</h2>
 
+        {/* First service */}
         <div className="service service-a">
           <div className="service-media">
             <img src="https://images.pexels.com/photos/620530/pexels-photo-620530.jpeg"/>
@@ -79,37 +80,35 @@ function Homepage() {
           </div>
         </div>
 
+        {/* S2 service */}
         <div className="service service-b">
           <div className="service-copy">
-            <h3 className="service-label">Business Protection</h3>
+            <div className="service-chip">Business Protection</div>
             <p>
               Safeguard your company against risks with flexible insurance
               solutions designed to keep your operations running smoothly.
             </p>
           </div>
           <div className="service-media">
-            <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1470&auto=format&fit=crop"
-            />
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1470&auto=format&fit=crop"/>
           </div>
         </div>
 
+        {/* Third service */}
         <div className="service service-c">
-          <div className="service-media">
-            <img
-              src="https://images.pexels.com/photos/11895978/pexels-photo-11895978.jpeg"
-              alt="Modern building"
-            />
-          </div>
           <div className="service-copy">
-            <div className="service-chip">Future Planning</div>
             <p>
               Plan ahead with financial and insurance strategies that secure your
               future — so you can move forward with confidence.
             </p>
           </div>
+          <div className="service-media">
+            <img src="https://images.pexels.com/photos/11895978/pexels-photo-11895978.jpeg"/>
+            <div className="service-chip">Future Planning</div>
+          </div>
         </div>
       </section>
+
 
       <div className="bottom-arcs" aria-hidden="true">
         <div className="arc arc-green" />
