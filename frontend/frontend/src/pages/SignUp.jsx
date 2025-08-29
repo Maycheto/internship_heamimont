@@ -7,11 +7,9 @@ export default function Signup() {
 
   return (
     <div className="signup-container">
-      {/* Geometric background shapes */}
       <div className="geometric-shape-1"></div>
       <div className="geometric-shape-2"></div>
 
-      {/* Header with back button */}
       <div className="header">
         <button className="back-button">
           <span className="icon arrow-left-icon"></span>
@@ -19,7 +17,6 @@ export default function Signup() {
         <span className="header-text">Pink</span>
       </div>
 
-      {/* Signup card */}
       <div className="signup-card">
         <div className="form-header">
           <h1 className="form-title">Get Started</h1>
@@ -27,7 +24,6 @@ export default function Signup() {
         </div>
 
         <form className="signup-form">
-          {/* Name fields */}
           <div className="name-row">
             <input
               type="text"
@@ -41,14 +37,12 @@ export default function Signup() {
             />
           </div>
 
-          {/* Email */}
           <input
             type="email"
             placeholder="Email Address"
             className="form-input"
           />
 
-          {/* Password */}
           <div className="password-container">
             <input
               type={showPassword ? "text" : "password"}
@@ -68,7 +62,6 @@ export default function Signup() {
             </button>
           </div>
 
-          {/* Confirm Password */}
           <div className="password-container">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -88,7 +81,6 @@ export default function Signup() {
             </button>
           </div>
 
-          {/* Terms checkbox */}
           <div className="checkbox-container">
             <input type="checkbox" id="terms" className="checkbox" defaultChecked />
             <label htmlFor="terms" className="checkbox-label">
@@ -96,12 +88,10 @@ export default function Signup() {
             </label>
           </div>
 
-          {/* Submit button */}
           <button type="submit" className="submit-button">
             Sign up
           </button>
 
-          {/* Login link */}
           <div className="login-link-container">
             <p className="login-text">
               Already have an account?{" "}

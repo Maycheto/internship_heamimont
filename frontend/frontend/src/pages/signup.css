@@ -33,27 +33,22 @@ body {
   border: 3px solid hsl(330, 25%, 15%);
 }
 
+/* White card in the center (matches reference proportions) */
 .signup-container {
   width: 1025px;
   height: 852px;
-
-  /* Center it */
-  position: absolute; 
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  /* Styling */
-  background: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border-radius: 32px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.5);
-
-  /* Remove full-screen stuff */
   min-height: unset;
-  display: flex;         /* optional, for centering contents inside */
-  align-items: center;   /* optional */
-  justify-content: center; /* optional */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Additional geometric shapes */
@@ -88,12 +83,14 @@ body {
 }
 
 .back-button {
-  background: transparent;
-  border: none;
+  background: #ffffff;
+  border: 1px solid hsl(330, 25%, 25%);
   color: hsl(330, 25%, 25%);
   cursor: pointer;
   padding: 0.5rem;
-  border-radius: 0.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -107,21 +104,30 @@ body {
 
 .header-text {
   margin-left: 0.75rem;
-  color: hsl(330, 25%, 30%);
-  font-weight: 500;
+  color: hsl(330, 25%, 20%);
+  font-weight: 700;
+  font-size: 24px;
 }
 
 /* Main form card */
 .signup-card {
-  background: white;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  width: 100%;
-  max-width: 28rem;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 48px 56px 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  width: 760px;
   position: relative;
   z-index: 10;
+}
+
+/* Inner bordered panel around the form like the reference */
+.signup-card::before {
+  content: '';
+  position: absolute;
+  inset: 24px;
+  border: 2px solid hsl(330, 25%, 70%);
+  border-radius: 22px;
+  pointer-events: none;
 }
 
 /* Header section */
@@ -131,17 +137,19 @@ body {
 }
 
 .form-title {
-  font-size: 1.875rem;
-  font-weight: bold;
-  color: hsl(330, 25%, 25%);
-  margin-bottom: 0.5rem;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: hsl(330, 25%, 20%);
+  margin-bottom: 8px;
 }
 
 .form-subtitle {
-  font-size: 1.125rem;
-  color: hsl(330, 10%, 60%);
+  font-size: 22px;
+  color: hsl(330, 25%, 25%);
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 12px;
+  font-weight: 700;
 }
 
 /* Accent underline for subtitle */
@@ -151,9 +159,9 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 3px;
-  background: linear-gradient(90deg, hsl(165, 100%, 60%) 0%, hsl(165, 100%, 60%) 100%);
+  width: 390px;
+  height: 4px;
+  background: hsl(165, 100%, 40%);
   border-radius: 2px;
 }
 
@@ -161,25 +169,26 @@ body {
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 
 /* Name fields row */
 .name-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 22px;
 }
 
 /* Input field styling */
 .form-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: white;
-  border: 1px solid hsl(330, 20%, 80%);
-  border-radius: 9999px;
-  color: hsl(330, 25%, 25%);
-  font-size: 1rem;
+  height: 52px;
+  padding: 0 20px;
+  background: #ffffff;
+  border: 2px solid hsl(330, 25%, 75%);
+  border-radius: 28px;
+  color: hsl(330, 25%, 20%);
+  font-size: 16px;
   transition: all 0.2s;
   outline: none;
 }
@@ -189,8 +198,8 @@ body {
 }
 
 .form-input:focus {
-  border-color: hsl(330, 60%, 40%);
-  box-shadow: 0 0 0 2px hsl(330, 60%, 40%, 0.2);
+  border-color: hsl(330, 25%, 40%);
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
 }
 
 /* Password input container */
@@ -200,7 +209,7 @@ body {
 
 .password-toggle {
   position: absolute;
-  right: 1rem;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -219,16 +228,16 @@ body {
 .checkbox-container {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .checkbox {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid hsl(330, 20%, 80%);
-  border-radius: 0.25rem;
-  background: white;
+  width: 18px;
+  height: 18px;
+  border: 2px solid hsl(330, 25%, 30%);
+  border-radius: 4px;
+  background: #ffffff;
   cursor: pointer;
   position: relative;
 }
@@ -250,29 +259,30 @@ body {
 }
 
 .checkbox-label {
-  font-size: 0.875rem;
-  color: hsl(330, 10%, 60%);
+  font-size: 15px;
+  color: hsl(330, 10%, 40%);
   cursor: pointer;
 }
 
 /* Submit button */
 .submit-button {
-  width: 100%;
-  background: hsl(330, 60%, 40%);
-  color: white;
+  width: 320px;
+  align-self: center;
+  background: hsl(330, 60%, 30%);
+  color: #ffffff;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 16px 24px;
   border-radius: 9999px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 1.5rem;
+  margin-top: 28px;
 }
 
 .submit-button:hover {
-  background: hsl(330, 60%, 35%);
-  box-shadow: 0 10px 25px -5px hsl(330, 60%, 40%, 0.3);
+  background: hsl(330, 60%, 26%);
+  box-shadow: 0 12px 30px -6px hsl(330deg 60% 30% / 35%);
 }
 
 /* Login link section */
@@ -282,14 +292,14 @@ body {
 }
 
 .login-text {
-  color: hsl(330, 10%, 60%);
-  font-size: 0.875rem;
+  color: hsl(330, 10%, 40%);
+  font-size: 16px;
 }
 
 .login-link {
-  color: hsl(165, 100%, 60%);
+  color: hsl(165, 100%, 40%);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   transition: color 0.2s;
 }
 
@@ -300,8 +310,8 @@ body {
 /* Responsive design */
 @media (max-width: 640px) {
   .signup-card {
-    padding: 1.5rem;
-    margin: 1rem;
+    padding: 32px 24px;
+    margin: 16px;
   }
   
   .name-row {
@@ -309,7 +319,7 @@ body {
   }
   
   .form-subtitle::after {
-    width: 150px;
+    width: 220px;
   }
   
   .geometric-shape-1,
