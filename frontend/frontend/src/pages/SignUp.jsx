@@ -7,7 +7,7 @@ export default function Signup() {
 
   return (
     <div className="signup-container">
-      <div className="geometric-shape-1"></div>
+      <div className="geometric-shape-1"></div> 
       <div className="geometric-shape-2"></div>
         
 
@@ -83,7 +83,7 @@ export default function Signup() {
           </div>
 
           <div className="checkbox-container">
-            <input type="checkbox" id="terms" className="checkbox" defaultChecked />
+            <input type="checkbox" id="terms" className="checkbox"/>
             <label htmlFor="terms" className="checkbox-label">
               I accept the terms and privacy policy
             </label>
@@ -96,7 +96,7 @@ export default function Signup() {
           <div className="login-link-container">
             <p className="login-text">
               Already have an account?{" "}
-              <a href="#" className="login-link">
+              <a href="login" to="/login" className="login-link">
                 Log in
               </a>
             </p>
