@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,12 +20,18 @@ public class MyAppUserService implements UserDetailsService{
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyAppUser user = repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .roles("USER")
-                .build();
+        
+        Optional<MyAppUser> user = repository.findByUsername(username);
+        if (user.isPresent()) {
+            var userObj = user.get();
+            return User.builder()
+                    .username(userObj.getUsername())
+                    .password(userObj.getPassword())
+                    .disabled(!userObj.isVerified()) 
+                    .authorities("USER")          
+                    .build();   
+                }else{
+            throw new UsernameNotFoundException(username);
+        }
     }
 }

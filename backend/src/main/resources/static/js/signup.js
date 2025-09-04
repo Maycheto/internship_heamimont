@@ -1,40 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const signupForm = document.querySelector('section');
+    const form = document.getElementById('signupForm');
 
-    signupForm.style.opacity = 0;
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-    setTimeout(() => {
-        signupForm.style.transition = 'opacity 1s ease-in-out';
-        signupForm.style.opacity = 1;
-    }, 500);
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
-    const form = signupForm.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
+        if (password !== confirmPassword) {
+            alert("Паролите не съвпадат!");
+            return;
+        }
 
-            const formData = new FormData(form);
-            const user = {
-                username: formData.get('username'),
-                email: formData.get('email'),
-                password: formData.get('password')
-            };
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+        if (!passwordPattern.test(password)) {
+            alert("Паролата трябва да е поне 8 символа, да съдържа главна и малка буква, цифра и специален знак!");
+            return;
+        }
 
-            fetch('/req/signup', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(user)
-            })
-            .then(async res => {
-                const message = await res.text(); // взимаме текста от backend-a
-                if (res.ok) {
-                    alert(message); // "Регистрацията е успешна!"
-                    window.location.href = '/index'; 
-                } else {
-                    alert(message); // "Потребителското име вече съществува!"
-                }
-            })
-            .catch(err => console.error(err));
-        });
-    }
+        const user = { username, email, password };
+
+        fetch('/req/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        })
+        .then(res => {
+            if (res.ok) {
+                window.location.href = '/req/login';
+            } else {
+                res.text().then(message => alert(message));
+            }
+        })
+        .catch(err => console.error(err));
+    });
 });
