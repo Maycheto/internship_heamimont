@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup Form</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/signup.js" defer></script> 
+</head>
+<body>
+  <section>
+    <form id="signupForm">
+      <h1>Sign Up</h1>
+
+      <div class="inputbox">
+        <input type="text" id="username" name="username" required>
+        <label for="username">Username</label>
+      </div>
+
+      <div class="inputbox">
+        <input type="email" id="email" name="email" required>
+        <label for="email">Email</label>
+      </div>
+
+      <div class="inputbox">
+        <input type="password" id="password" name="password" required>
+        <label for="password">Password</label>
+      </div>
+
+      <div class="inputbox">
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <label for="confirmPassword">Confirm Password</label>
+      </div>
+
+      <button type="submit">Sign Up</button>
+
+      <div class="register">
+        <p>Already have an account? <a href="/login">Log In</a></p>
+      </div>
+    </form>
+  </section>
+</body>
+</html>

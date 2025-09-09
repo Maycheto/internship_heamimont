@@ -1,0 +1,32 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ivanova.nikol2008@gmail.com
+    password: "msdq okor jhgt vxnj"
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    password: "0884999440"
+    url: jdbc:postgresql://localhost:5432/registration
+    username: nikol
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect 
+          format-sql: true
+    show-sql: true
+
