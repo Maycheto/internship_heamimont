@@ -10,19 +10,17 @@ body {
   min-height: 100vh;
 }
 
-/* Main container */
 .login-container {
   min-height: 100vh;
   background: #F3A1C7;
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: 5%;
+  justify-content: center; 
+  padding: 20px;
 }
 
-/* Decorative shape at bottom left */
 .decorative-shape {
-  margin: 50px;
   position: absolute;
   bottom: 5%;
   left: 2%;
@@ -34,14 +32,13 @@ body {
   z-index: 1;
 }
 
-/* Main pink panel */
 .main-panel {
   background: #F3A1C7;
   border-radius: 50px;
   padding: 0;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 600px;
-  margin-right: 50px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 10;
@@ -49,7 +46,6 @@ body {
   flex-direction: column;
 }
 
-/* White header section */
 .header-section {
   background: white;
   border-radius: 32px 32px 0 0;
@@ -93,15 +89,26 @@ body {
   font-size: 24px;
 }
 
-/* Form section */
 .form-section {
   padding: 0 32px 32px 32px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  flex: 1;
 }
 
-/* Input fields */
+.welcome-text {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.welcome-title {
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .input-field {
   position: relative;
 }
@@ -128,27 +135,27 @@ body {
   box-shadow: 0 0 0 3px rgba(243, 161, 199, 0.1);
 }
 
-/* Password field with icons */
 .password-field {
   position: relative;
 }
 
-.password-icons {
+.password-toggle {
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.eye-icon {
-  font-size: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
   color: #999;
+  transition: color 0.2s;
 }
 
-/* Options row */
+.password-toggle:hover {
+  color: #666;
+}
+
 .options-row {
   display: flex;
   justify-content: space-between;
@@ -170,6 +177,7 @@ body {
   background: white;
   cursor: pointer;
   position: relative;
+  appearance: none;
 }
 
 .checkbox:checked {
@@ -189,7 +197,7 @@ body {
 }
 
 .checkbox-label {
-  color: #666;
+  color: white;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -198,7 +206,7 @@ body {
 .forgot-password {
   background: none;
   border: none;
-  color: #F3A1C7;
+  color: white;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -207,11 +215,10 @@ body {
 }
 
 .forgot-password:hover {
-  color: #E08BB8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Sign up button */
-.signup-button {
+.login-button {
   width: 100%;
   background: #59213E;
   color: white;
@@ -225,27 +232,26 @@ body {
   margin-top: 16px;
 }
 
-.signup-button:hover {
+.login-button:hover {
   background: #4A1A33;
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(89, 33, 62, 0.3);
 }
 
-/* Account prompt */
 .account-prompt {
   text-align: center;
   margin-top: 16px;
 }
 
 .prompt-text {
-  color: #666;
+  color: white;
   font-size: 14px;
 }
 
 .signup-link {
   background: none;
   border: none;
-  color: #F3A1C7;
+  color: white;
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
@@ -254,14 +260,12 @@ body {
 }
 
 .signup-link:hover {
-  color: #E08BB8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .login-container {
     padding: 20px;
-    justify-content: center;
   }
   
   .main-panel {
@@ -281,5 +285,9 @@ body {
   
   .decorative-shape {
     display: none;
+  }
+  
+  .welcome-title {
+    font-size: 28px;
   }
 }

@@ -66,7 +66,6 @@ function Homepage() {
       <section className="services" id="services">
         <h2 className="services-title">Our Services</h2>
 
-        {/* First service */}
         <div className="service service-a">
           <div className="service-media">
             <img src="https://images.pexels.com/photos/620530/pexels-photo-620530.jpeg"/>
@@ -80,7 +79,6 @@ function Homepage() {
           </div>
         </div>
 
-        {/* S2 service */}
         <div className="service service-b">
           <div className="service-copy">
             <div className="service-chip">Business Protection</div>
@@ -94,7 +92,6 @@ function Homepage() {
           </div>
         </div>
 
-        {/* Third service */}
         <div className="service service-c">
           <div className="service-copy">
             <p>
