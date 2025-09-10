@@ -8,11 +8,10 @@
 
 body {
   font-family: "Podkova";
-  background: #F3A1C7;
+  background: linear-gradient(to right, #33ce7d -20%, #f2a1c7 25%, #f2a1c7 75%, #33ce7d 120%);
   min-height: 100vh;
 }
 
-/* background*/
 .signup-container::before,
 .signup-container::after {
   content: '';
@@ -21,13 +20,13 @@ body {
 }
 
 .signup-container {
-  width: 1025px;
-  height: 852px;
+  width: 1227px;
+  margin-left: 8px;
+  height: 640px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #F3A1C7;
   border-radius: 32px;
   min-height: unset;
   display: flex;
@@ -35,27 +34,26 @@ body {
   justify-content: center;
 }
 
-/*квадрати отзад */
 .geometric-shape-1 {
   position: absolute;
-  top: 20%;
+  top: -10%;
   right: 10%;
-  width: 100px;
-  height: 100px;
+  width: 500px;
+  height: 500px;
   border: 3px solid #59213E;
   transform: rotate(45deg);
-  border-radius: 10px;
+  border-radius: 80px;
 }
 
 .geometric-shape-2 {
   position: absolute;
-  bottom: 30%;
-  left: 8%;
-  width: 80px;
-  height: 120px;
+  bottom: 10%;
+  left: 0%;
+  width: 500px;
+  height: 500px;
   border: 3px solid #59213E;
   transform: rotate(-30deg);
-  border-radius: 25px;
+  border-radius: 300px;
 }
 
 .header {
@@ -67,30 +65,36 @@ body {
 }
 
 .back-button {
-  background: #ffffff;
+  background: #f2a1c7;
   border: 1px solid hsl(330, 25%, 25%);
-  color: hsl(330, 25%, 25%);
+  border-width: 2px;
   cursor: pointer;
   padding: 0.5rem;
-  width: 44px;
+  width: 120px;
   height: 44px;
-  border-radius: 9999px;
+  border-radius: 20px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: #59213E;
 }
 
 .back-button:hover {
+  border: 2px solid #59213E;
   color: #59213E;
-  background: rgba(255, 255, 255, 0.1);
+  background: #d782a9;
+}
+
+.icon {
+  display: inline-block;
 }
 
 .header-text {
   margin-left: 0.75rem;
-  color: hsl(330, 25%, 20%);
+  color: #59213E;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 30px;
 }
 
 .signup-card {
@@ -99,6 +103,7 @@ body {
   padding: 48px 56px 40px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   width: 760px;
+  height: 670px;
   position: relative;
   z-index: 10;
 }
@@ -261,12 +266,15 @@ body {
 
 .login-link-container {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.1rem;/*MESTQ GO NAGORE*/
+  background-color: transparent;
+  top: 20px;
 }
 
 .login-text {
   color: hsl(330, 10%, 40%);
   font-size: 16px;
+  top: 20px
 }
 
 .login-link {
@@ -274,13 +282,14 @@ body {
   text-decoration: none;
   font-weight: 700;
   transition: color 0.2s;
+  top: 20px;
 }
 
 .login-link:hover {
   color: hsl(165, 100%, 50%);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 650px) {
   .signup-card {
     padding: 32px 24px;
     margin: 16px;
@@ -318,6 +327,10 @@ body {
 }
 
 .arrow-left-icon::before {
-  content: '←';
+  margin-left: -20px;
+  content: '←Back';
   font-size: 1.25rem;
+  position: realtive;
+  top: 20px;
+  
 }

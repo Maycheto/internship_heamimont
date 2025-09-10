@@ -1,0 +1,91 @@
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  border-bottom: 1.5px solid #eee;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  color: #33ce7d;
+  font-family: "Podkova", serif;
+  cursor: pointer;
+}
+
+.insights-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto;
+  max-width: 1100px;
+  padding: 0 20px;
+}
+
+.insights-box {
+  background: #f292c2; 
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.insights-box h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.insights-box p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Insights Cards */
+.insights-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+.insight-card {
+  background: #ffe4f0; /* lighter pink */
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.insight-card h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.insight-card p {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #444;
+}
+
+.insight-card a {
+  font-weight: 600;
+  color: #33ce7d;
+  text-decoration: none;
+}
+
+.insight-card a:hover {
+  text-decoration: underline;
+}

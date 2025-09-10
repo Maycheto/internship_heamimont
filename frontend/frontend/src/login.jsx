@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './login.css';
+import buildings from './buildings.jpeg';
 
 const LoginPageCSS = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,87 +13,65 @@ const LoginPageCSS = () => {
     console.log('Login attempt:', { email, password, rememberMe });
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <div className="login-container">
-      <div className="decorative-shape"></div>
-      
-      <div className="main-panel">
-        <div className="header-section">
-          <button className="back-button">
-            <span className="back-arrows">←</span>
-          </button>
-          <span className="brand-text">Pink</span>
-        </div>
-        
-        <div className="form-section">
-          <div className="welcome-text">
-            <h2 className="welcome-title">Welcome<br />Back!</h2>
+
+      <div className="topbar">
+        <button className="back-btn" type="button">←</button>
+        <span className="brand">Pink</span>
+      </div>
+
+      <div className="login-card">
+        <h1 className="card-title">Welcome<br/>Back!</h1>
+
+        <form onSubmit={handleSubmit} className="form">
+          <div className="field">
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input"
+              required
+            />
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="input-field">
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="form-input"
-                required
-              />
-            </div>
-            
-            <div className="input-field password-field">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-input"
-                required
-              />
-              <button 
-                type="button"
-                className="password-toggle"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? '🙈' : '👁️'}
-              </button>
-            </div>
-            
-            <div className="options-row">
-              <div className="checkbox-container">
-                <input
-                  type="checkbox"
-                  id="remember"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="checkbox"
-                />
-                <label htmlFor="remember" className="checkbox-label">
-                  Remember me
-                </label>
-              </div>
-              <button type="button" className="forgot-password">
-                Forgot password?
-              </button>
-            </div>
-            
-            <button type="submit" className="login-button">
-              Log in
-            </button>
-          </form>
-          
-          <div className="account-prompt">
-            <span className="prompt-text">Don't have an account? </span>
-            <button type="button" className="signup-link">
-              Sign up
+          <div className="field password">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input"
+              required
+            />
+            <button
+              type="button"
+              aria-label="Toggle password visibility"
+              className="toggle-eye"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <span className="eye">👁</span>
+              
             </button>
           </div>
-        </div>
+
+          <div className="row">
+            <label className="remember">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              <span>Remember me</span>
+            </label>
+            <button type="button" className="link muted align-right">Forgot password?</button>
+          </div>
+
+          <button type="submit" className="primary-btn">Log in</button>
+        </form>
+
+        <p className="foot-note">Don't have an account? <button type="button" className="link">Sign up</button></p>
       </div>
     </div>
   );
