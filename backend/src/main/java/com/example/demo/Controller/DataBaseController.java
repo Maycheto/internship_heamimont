@@ -35,7 +35,6 @@ public class DataBaseController {
     private final String pgUser = "postgres";
     private final String pgPassword = "0884999440";
 
-    // -------------------- Главна страница --------------------
     @GetMapping("/")
     public String home(Authentication authentication, Model model) {
         MyAppUser user = userRepository.findByUsername(authentication.getName())
@@ -47,7 +46,7 @@ public class DataBaseController {
         return "index";
     }
 
-    // -------------------- Създаване на база --------------------
+    // Create dynamic data base
     @PostMapping("/db/create")
     @ResponseBody
     public ResponseEntity<String> createDatabase(@RequestParam String dbName, Authentication authentication) {
@@ -59,13 +58,13 @@ public class DataBaseController {
                 return ResponseEntity.badRequest().body("Базата вече съществува!");
             }
 
-            // Създаваме самата база
+            // Creating the database itself
             try (Connection conn = DriverManager.getConnection(pgUrl, pgUser, pgPassword);
                  Statement stmt = conn.createStatement()) {
                 stmt.executeUpdate("CREATE DATABASE \"" + dbName + "\"");
             }
 
-            // Създаваме таблиците в новата база
+            // Creating the tables in the new database
             String newDbUrl = "jdbc:postgresql://localhost:5432/" + dbName;
             try (Connection conn = DriverManager.getConnection(newDbUrl, pgUser, pgPassword);
                  Statement stmt = conn.createStatement()) {
@@ -107,7 +106,7 @@ public class DataBaseController {
                 """);
             }
 
-            // Запис в data_bases
+            // Saving the database entry
             DataBaseEntry entry = new DataBaseEntry();
             entry.setDbName(dbName);
             entry.setUserId(user.getId());
@@ -119,7 +118,7 @@ public class DataBaseController {
         }
     }
 
-    // -------------------- Триене на база --------------------
+    // Delete dynamic data base
     @PostMapping("/db/delete/{dbName}")
     @ResponseBody
     public ResponseEntity<String> deleteDatabase(@PathVariable String dbName, Authentication authentication) {
