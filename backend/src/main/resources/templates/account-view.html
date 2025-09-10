@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Акаунт: [[${accountId}]]</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-3">
+
+<h1>Акаунт: <span th:text="${accountId}">AccountID</span></h1>
+
+<!-- Locations -->
+<div class="mb-3">
+  <input type="text" id="locationName" placeholder="Име на локация" class="form-control mb-2" />
+  <button id="addLocationBtn" class="btn btn-primary">Добави Location</button>
+</div>
+
+<ul class="list-group" id="locationsList">
+  <li th:if="${#lists.isEmpty(locations)}" class="list-group-item text-muted">Няма локации.</li>
+  <li th:each="l : ${locations}" class="list-group-item d-flex justify-content-between align-items-center">
+    <span th:text="${l.location}">LocationName</span>
+    <button class="btn btn-sm btn-danger" th:attr="onclick=|deleteLocation('${l.id}')|">Delete</button>
+  </li>
+</ul>
+
+<!-- Policies -->
+<div class="mt-4 mb-3">
+  <input type="number" step="0.01" id="policyPercent" placeholder="Процент" class="form-control mb-2" />
+  <input type="number" step="0.01" id="policyCost" placeholder="Цена" class="form-control mb-2" />
+  <button id="addPolicyBtn" class="btn btn-primary">Добави Policy</button>
+</div>
+
+<ul class="list-group" id="policiesList">
+  <li th:if="${#lists.isEmpty(policies)}" class="list-group-item text-muted">Няма полиси.</li>
+  <li th:each="p : ${policies}" class="list-group-item d-flex justify-content-between align-items-center">
+    <span th:text="'Процент: ' + ${p.percent} + ', Цена: ' + ${p.cost}">Policy</span>
+    <button class="btn btn-sm btn-danger" th:attr="onclick=|deletePolicy('${p.id}')|">Delete</button>
+  </li>
+</ul>
+
+<script>
+const dbName = "[[${dbName}]]";
+const accountId = "[[${accountId}]]";
+const portfolioId = "[[${portfolioId}]]";
+
+// Locations
+document.getElementById("addLocationBtn").addEventListener("click", async () => {
+  const location = document.getElementById("locationName").value.trim();
+  if(!location) return alert("Моля, въведете име на локация!");
+  const res = await fetch(`/db/${dbName}/portfolio/${portfolioId}/account/${accountId}/location/add?location=${encodeURIComponent(location)}`, { method: "POST"});
+  const text = await res.text();
+  alert(text);
+  location.reload();
+});
+
+function deleteLocation(id){
+  if(!confirm("Сигурни ли сте, че искате да изтриете тази локация?")) return;
+  fetch(`/db/${dbName}/portfolio/${portfolioId}/account/${accountId}/location/delete/${id}`, {method:"POST"})
+    .then(res=>res.text())
+    .then(text=>{alert(text); location.reload();});
+}
+
+// Policies
+document.getElementById("addPolicyBtn").addEventListener("click", async () => {
+  const percent = parseFloat(document.getElementById("policyPercent").value);
+  const cost = parseFloat(document.getElementById("policyCost").value);
+  if(isNaN(percent) || isNaN(cost)) return alert("Моля, въведете валидни стойности!");
+  const res = await fetch(`/db/${dbName}/portfolio/${portfolioId}/account/${accountId}/policy/add?percent=${percent}&cost=${cost}`, { method: "POST"});
+  const text = await res.text();
+  alert(text);
+  location.reload();
+});
+
+function deletePolicy(id){
+  if(!confirm("Сигурни ли сте, че искате да изтриете този полис?")) return;
+  fetch(`/db/${dbName}/portfolio/${portfolioId}/account/${accountId}/policy/delete/${id}`, {method:"POST"})
+    .then(res=>res.text())
+    .then(text=>{alert(text); location.reload();});
+}
+</script>
+
+</body>
+</html>

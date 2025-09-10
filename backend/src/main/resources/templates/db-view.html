@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Портфолиа в база [[${dbName}]]</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-3">
+
+<h1>База: <span th:text="${dbName}">DatabaseName</span></h1>
+
+<!-- Създаване на ново портфолио -->
+<div class="mb-3">
+  <input type="text" id="portfolioName" placeholder="Име на портфолио" class="form-control mb-2" />
+  <button id="createPortfolioBtn" class="btn btn-primary">Създай портфолио</button>
+  <p id="message" style="color:red;"></p>
+</div>
+
+<!-- Списък на портфолиата -->
+<h2 class="mt-4">Портфолиа</h2>
+<ul class="list-group" id="portfolioList">
+  <li th:if="${#lists.isEmpty(portfolios)}" class="list-group-item text-muted">Няма създадени портфолиа.</li>
+  <li th:each="p : ${portfolios}" class="list-group-item d-flex justify-content-between align-items-center">
+    <span th:text="${p.portfolio_name}">PortfolioName</span>
+    <div>
+      <a th:href="@{'/db/' + ${dbName} + '/portfolio/view/' + ${p.id}}" class="btn btn-sm btn-success">View</a>
+      <button type="button" class="btn btn-sm btn-danger"
+        th:attr="onclick=|deletePortfolio('${p.id}')|">Delete</button>
+    </div>
+  </li>
+</ul>
+
+<script>
+async function deletePortfolio(id, dbName) {
+  if (!confirm("Сигурни ли сте, че искате да изтриете портфолиото?")) return;
+  const response = await fetch(`/db/${dbName}/portfolio/delete/${id}`, { method: "POST" });
+  const text = await response.text();
+  if(response.ok){
+    alert(text);
+    location.reload();
+  } else {
+    alert("Грешка: " + text);
+  }
+}
+
+document.getElementById("createPortfolioBtn").addEventListener("click", async () => {
+  const portfolioName = document.getElementById("portfolioName").value.trim();
+  const message = document.getElementById("message");
+  message.textContent = "";
+  const dbName = "[[${dbName}]]";
+
+  if (!portfolioName) {
+    message.textContent = "Моля, въведете име на портфолио!";
+    return;
+  }
+
+  try {
+    const response = await fetch(`/db/${dbName}/portfolio/add?portfolioName=${encodeURIComponent(portfolioName)}`, { method: "POST" });
+    const text = await response.text();
+    if(response.ok){
+      message.style.color = "green";
+      message.textContent = text;
+      setTimeout(() => location.reload(), 500);
+    } else {
+      message.style.color = "red";
+      message.textContent = text;
+    }
+  } catch(err){
+    message.style.color = "red";
+    message.textContent = "Грешка при свързване със сървъра!";
+    console.error(err);
+  }
+});
+</script>
+
+</body>
+</html>

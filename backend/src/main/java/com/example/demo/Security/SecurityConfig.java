@@ -58,11 +58,11 @@ public class SecurityConfig {
                                 response.sendRedirect("/req/login?error");
                             }
                         })
-                        .defaultSuccessUrl("/index", true)
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .authorizeHttpRequests(registry -> registry
-                        .requestMatchers("/css/**", "/js/**", "/req/**", "/index").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/req/**", "/index", "/account-view", "/db-view", "/portfolio-view").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

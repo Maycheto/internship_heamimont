@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Акаунти в портфолио</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-3">
+
+<h1>Портфолио: <span th:text="${portfolioId}"></span> в база <span th:text="${dbName}"></span></h1>
+
+<!-- Форма за добавяне на акаунт -->
+<div class="mb-3">
+  <input type="text" id="accName" placeholder="Име на акаунт" class="form-control mb-2" />
+  <button id="createAccountBtn" class="btn btn-primary">Създай акаунт</button>
+  <p id="message" style="color:red;"></p>
+</div>
+
+<!-- Списък с акаунтите -->
+<h2 class="mt-4">Акаунти</h2>
+<ul class="list-group" id="accountList">
+  <li th:if="${#lists.isEmpty(accounts)}" class="list-group-item text-muted">
+    Няма създадени акаунти.
+  </li>
+  <li th:each="a : ${accounts}" class="list-group-item d-flex justify-content-between align-items-center">
+    <span th:text="${a.acc_name}">AccountName</span>
+    <div>
+      <!-- Ако имаш нужда от View за локации и полици -->
+    <a th:href="@{'/db/' + ${dbName} + '/portfolio/' + ${portfolioId} + '/account/' + ${a.id} + '/view'}" 
+      class="btn btn-sm btn-success">View</a>
+      <button type="button" class="btn btn-sm btn-danger"
+              th:attr="onclick=|deleteAccount('${a.id}')|">Delete</button>
+    </div>
+  </li>
+</ul>
+
+<script>
+document.getElementById("createAccountBtn").addEventListener("click", async () => {
+  const accName = document.getElementById("accName").value.trim();
+  const message = document.getElementById("message");
+  message.textContent = "";
+
+  if (!accName) {
+    message.textContent = "Моля, въведете име на акаунт!";
+    return;
+  }
+
+  try {
+    const response = await fetch(`/db/${'[[${dbName}]]'}/portfolio/${'[[${portfolioId}]]'}/account/add?accName=${encodeURIComponent(accName)}`, {
+      method: "POST"
+    });
+    const text = await response.text();
+
+    if (response.ok) {
+      message.style.color = "green";
+      message.textContent = text;
+      setTimeout(() => location.reload(), 500);
+    } else {
+      message.style.color = "red";
+      message.textContent = text;
+    }
+  } catch (err) {
+    message.style.color = "red";
+    message.textContent = "Грешка при свързване със сървъра!";
+    console.error(err);
+  }
+});
+
+async function deleteAccount(id) {
+  if (!confirm("Сигурни ли сте, че искате да изтриете акаунта?")) return;
+  const response = await fetch(`/db/${'[[${dbName}]]'}/portfolio/${'[[${portfolioId}]]'}/account/delete/${id}`, { method: "POST" });
+  const text = await response.text();
+  if (response.ok) {
+    alert(text);
+    location.reload();
+  } else {
+    alert("Грешка: " + text);
+  }
+}
+</script>
+
+</body>
+</html>
