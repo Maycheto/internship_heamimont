@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./signup.css";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -10,6 +10,15 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Disable page scrolling while on Sign Up page
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -19,7 +28,6 @@ export default function Signup() {
     }
 
     setError(""); 
-
     console.log("Form submitted!", { password, confirmPassword });
   };
 
@@ -49,7 +57,7 @@ export default function Signup() {
 
           <input type="email" placeholder="Email Address" className="form-input" />
 
-          <div className="password-container">
+          <div className={`password-container ${error ? "input-error" : ""}`}>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
@@ -66,7 +74,7 @@ export default function Signup() {
             </button>
           </div>
 
-          <div className="password-container">
+          <div className={`password-container ${error ? "input-error" : ""}`}>
             <input
               type={showConfirmPassword ? "text" : "password"}
               placeholder="Confirm Password"
@@ -79,14 +87,11 @@ export default function Signup() {
               className="password-toggle"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
-              <span
-                className={`icon ${showConfirmPassword ? "eye-off-icon" : "eye-icon"}`}
-              ></span>
+              <span className={`icon ${showConfirmPassword ? "eye-off-icon" : "eye-icon"}`}></span>
             </button>
           </div>
 
-          {/* 🚨 Error message goes right below confirm password */}
-          {error && <p className="error-message">{error}</p>}
+          {error && <p className="error-message-text">{error}</p>}
 
           <div className="checkbox-container">
             <input type="checkbox" id="terms" className="checkbox" />

@@ -1,0 +1,41 @@
+.solutions-content {
+  padding: 4rem 2rem;
+}
+
+.solutions-box {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.solutions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.solution-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.solution-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.solution-card p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.solution-card a {
+  color: hsl(165, 100%, 40%);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.solution-card a:hover {
+  color: hsl(165, 100%, 50%);
+}

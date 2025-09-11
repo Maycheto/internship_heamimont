@@ -20,15 +20,14 @@ body {
 }
 
 .signup-container {
-  width: 1227px;
-  margin-left: 8px;
-  height: 640px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  max-width: 1310px;
+  margin-right: -300px;
+  width: 3500px;
+  margin: 0 auto;
+  height: 100vh;
+  padding: 24px 16px;
+  position: relative;
   border-radius: 32px;
-  min-height: unset;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,16 +93,18 @@ body {
   margin-left: 0.75rem;
   color: #59213E;
   font-weight: 700;
+  margin-right: 20px;
   font-size: 30px;
 }
 
 .signup-card {
   background: #ffffff;
   border-radius: 28px;
-  padding: 48px 56px 40px;
+  padding: 32px 40px 28px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-  width: 760px;
-  height: 670px;
+  width: min(760px, 92vw);
+  height: auto;
+  max-height: calc(100vh - 80px);
   position: relative;
   z-index: 10;
 }
@@ -119,11 +120,11 @@ body {
 
 .form-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-title {
-  font-size: 56px;
+  font-size: 44px;
   line-height: 1.05;
   font-weight: 800;
   color: hsl(330, 25%, 20%);
@@ -131,7 +132,7 @@ body {
 }
 
 .form-subtitle {
-  font-size: 22px;
+  font-size: 18px;
   color: hsl(330, 25%, 25%);
   position: relative;
   padding-bottom: 12px;
@@ -144,7 +145,7 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 390px;
+  width: 280px;
   height: 4px;
   background: hsl(165, 100%, 40%);
   border-radius: 2px;
@@ -153,18 +154,18 @@ body {
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .name-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 16px;
 }
 
 .form-input {
   width: 100%;
-  height: 52px;
+  height: 46px;
   padding: 0 20px;
   background: #ffffff;
   border: 2px solid hsl(330, 25%, 75%);
@@ -211,6 +212,16 @@ body {
   gap: 12px;
   margin-top: 8px;
 }
+.error-message-text {
+  color: #b72023;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 4px;
+  text-align: center;
+}
+.input-error .form-input {
+  border-color: #b72023;
+}
 
 .checkbox {
   width: 18px;
@@ -250,13 +261,13 @@ body {
   background: hsl(330, 60%, 30%);
   color: #ffffff;
   border: none;
-  padding: 16px 24px;
+  padding: 14px 22px;
   border-radius: 9999px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 28px;
+  margin-top: 20px;
 }
 
 .submit-button:hover {

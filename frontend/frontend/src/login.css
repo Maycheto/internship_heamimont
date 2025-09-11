@@ -6,13 +6,15 @@
 
 body {
   font-family: "Podkova", sans-serif;
-  background-image: url("./buildings.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   min-height: 100vh;
 }
 
+/* Background handled by Background.jsx */
+.background {
+  filter: brightness(0.9);
+}
+
+/* Login container */
 .login-container {
   min-height: 100vh;
   position: relative;
@@ -22,16 +24,6 @@ body {
   padding: 24px;
 }
 
-/* green overlay */
-.login-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(70, 200, 150, 0.85), rgba(40, 160, 120, 0.65));
-  z-index: -1;
-}
-
-/* top-left back + brand */
 .topbar {
   position: absolute;
   top: 24px;
@@ -45,8 +37,8 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
   backdrop-filter: blur(6px);
   cursor: pointer;
@@ -63,9 +55,9 @@ body {
   height: 650px;
   max-width: calc(100vw - 120px);
   border-radius: 26px;
-  background: linear-gradient(180deg, #ff63b2, #ee5bac 60%, #e957a8);
+  background-color: #ff6bb3;
   padding: 44px 52px 34px;
-  box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
 }
 
 .card-title {
@@ -77,14 +69,21 @@ body {
   margin-bottom: 28px;
 }
 
-.form { display: grid; gap: 18px; }
-.field { position: relative; }
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  position: relative;
+}
+
 .input {
   width: 100%;
   height: 72px;
   border-radius: 26px;
-  border: 2px solid rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.95);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.95);
   padding: 0 24px;
   font-size: 20px;
 }
@@ -108,12 +107,32 @@ body {
   margin-top: 8px;
 }
 
-.remember { display: inline-flex; align-items: center; gap: 10px; }
-.remember input { width: 20px; height: 20px; }
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
 
-.link { background: none; border: none; color: white; text-decoration: underline; cursor: pointer; }
-.link.muted { opacity: 0.95; }
-.align-right { margin-left: auto; }
+.remember input {
+  width: 20px;
+  height: 20px;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link.muted {
+  opacity: 0.95;
+}
+
+.align-right {
+  margin-left: auto;
+}
 
 .primary-btn {
   margin-top: 10px;
@@ -128,10 +147,23 @@ body {
   cursor: pointer;
 }
 
-.foot-note { text-align: center; margin-top: 18px; color: white; font-size: 18px; }
+.foot-note {
+  text-align: center;
+  margin-top: 18px;
+  color: white;
+  font-size: 18px;
+}
 
 @media (max-width: 900px) {
-  .card-title { font-size: 48px; }
-  .input, .primary-btn { height: 64px; font-size: 18px; }
-  .login-card { padding: 32px 24px; }
+  .card-title {
+    font-size: 48px;
+  }
+  .input,
+  .primary-btn {
+    height: 64px;
+    font-size: 18px;
+  }
+  .login-card {
+    padding: 32px 24px;
+  }
 }
