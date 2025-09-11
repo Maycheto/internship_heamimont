@@ -20,7 +20,6 @@ public class DataBaseEntry {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    // getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

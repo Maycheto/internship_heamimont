@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/db/{dbName}/portfolio/{portfolioId}/account/{accountId}")
+@RequestMapping("/db/{dbName}/portfolio/{portfolioId}/account")
 public class AccountController {
 
     private final String pgUser = "postgres";
     private final String pgPassword = "0884999440";
 
-    // Преглед на акаунта с локации и полиси
-    @GetMapping("/view")
+    // View account (with locations and policies)
+    @GetMapping("/{accountId}/view")
     public String viewAccount(@PathVariable String dbName,
                               @PathVariable int portfolioId,
                               @PathVariable int accountId,
@@ -41,7 +42,7 @@ public class AccountController {
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
 
-            // Локации
+            // Locations
             try (ResultSet rs = stmt.executeQuery("SELECT * FROM locations WHERE account_id=" + accountId)) {
                 while (rs.next()) {
                     Map<String,Object> loc = new LinkedHashMap<>();
@@ -51,7 +52,7 @@ public class AccountController {
                 }
             }
 
-            // Полиси
+            // Policies
             try (ResultSet rs = stmt.executeQuery("SELECT * FROM policy WHERE account_id=" + accountId)) {
                 while (rs.next()) {
                     Map<String,Object> pol = new LinkedHashMap<>();
@@ -72,11 +73,70 @@ public class AccountController {
         model.addAttribute("locations", locations);
         model.addAttribute("policies", policies);
 
-        return "account-view"; // Thymeleaf template
+        return "account-view";
     }
 
-    // Добавяне на локация
-    @PostMapping("/location/add")
+    // Add new account
+    @PostMapping("/add")
+    @ResponseBody
+    public ResponseEntity<String> addAccount(@PathVariable String dbName,
+                                            @PathVariable int portfolioId,
+                                            @RequestParam String accName) {
+        String dbUrl = "jdbc:postgresql://localhost:5432/" + dbName;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword)) {
+
+            try (PreparedStatement checkPs = conn.prepareStatement(
+                    "SELECT COUNT(*) FROM accounts WHERE acc_name = ? AND portfolio_id = ?")) {
+                checkPs.setString(1, accName);
+                checkPs.setInt(2, portfolioId);
+
+                try (ResultSet rs = checkPs.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        return ResponseEntity.badRequest()
+                                .body("❌ Акаунт с име '" + accName + "' вече съществува в това портфолио!");
+                    }
+                }
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO accounts (acc_name, portfolio_id) VALUES (?, ?)")) {
+                ps.setString(1, accName);
+                ps.setInt(2, portfolioId);
+                ps.executeUpdate();
+            }
+
+            return ResponseEntity.ok("✅ Акаунтът е добавен успешно!");
+        } catch (SQLException e) {
+            return ResponseEntity.badRequest().body("Грешка: " + e.getMessage());
+        }
+    }
+
+
+    // Delete account (+ his locations and policies)
+    @PostMapping("/delete/{accountId}")
+    @ResponseBody
+    public ResponseEntity<String> deleteAccount(@PathVariable String dbName,
+                                                @PathVariable int portfolioId,
+                                                @PathVariable int accountId) {
+        String dbUrl = "jdbc:postgresql://localhost:5432/" + dbName;
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword)) {
+            conn.setAutoCommit(false);
+            try (Statement stmt = conn.createStatement()) {
+                stmt.executeUpdate("DELETE FROM policy WHERE account_id=" + accountId);
+                stmt.executeUpdate("DELETE FROM locations WHERE account_id=" + accountId);
+                stmt.executeUpdate("DELETE FROM accounts WHERE id=" + accountId);
+            }
+            conn.commit();
+            return ResponseEntity.ok("✅ Акаунтът и неговите данни са изтрити!");
+        } catch (SQLException e) {
+            return ResponseEntity.badRequest().body("Грешка: " + e.getMessage());
+        }
+    }
+
+    // Add location
+    @PostMapping("/{accountId}/location/add")
     @ResponseBody
     public ResponseEntity<String> addLocation(@PathVariable String dbName,
                                               @PathVariable int accountId,
@@ -85,7 +145,6 @@ public class AccountController {
 
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
-
             stmt.executeUpdate("INSERT INTO locations (location, account_id) VALUES ('" + location + "', " + accountId + ")");
             return ResponseEntity.ok("✅ Локацията е добавена успешно!");
         } catch (SQLException e) {
@@ -93,8 +152,8 @@ public class AccountController {
         }
     }
 
-    // Изтриване на локация
-    @PostMapping("/location/delete/{locationId}")
+    // Delete location
+    @PostMapping("/{accountId}/location/delete/{locationId}")
     @ResponseBody
     public ResponseEntity<String> deleteLocation(@PathVariable String dbName,
                                                  @PathVariable int accountId,
@@ -103,7 +162,6 @@ public class AccountController {
 
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
-
             stmt.executeUpdate("DELETE FROM locations WHERE id=" + locationId);
             return ResponseEntity.ok("✅ Локацията е изтрита успешно!");
         } catch (SQLException e) {
@@ -111,8 +169,8 @@ public class AccountController {
         }
     }
 
-    // Добавяне на полис
-    @PostMapping("/policy/add")
+    // Add policy
+    @PostMapping("/{accountId}/policy/add")
     @ResponseBody
     public ResponseEntity<String> addPolicy(@PathVariable String dbName,
                                             @PathVariable int accountId,
@@ -122,7 +180,6 @@ public class AccountController {
 
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
-
             stmt.executeUpdate("INSERT INTO policy (percent, cost, account_id) VALUES (" + percent + ", " + cost + ", " + accountId + ")");
             return ResponseEntity.ok("✅ Полисът е добавен успешно!");
         } catch (SQLException e) {
@@ -130,8 +187,8 @@ public class AccountController {
         }
     }
 
-    // Изтриване на полис
-    @PostMapping("/policy/delete/{policyId}")
+    // Delete policy
+    @PostMapping("/{accountId}/policy/delete/{policyId}")
     @ResponseBody
     public ResponseEntity<String> deletePolicy(@PathVariable String dbName,
                                                @PathVariable int accountId,
@@ -140,7 +197,6 @@ public class AccountController {
 
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
-
             stmt.executeUpdate("DELETE FROM policy WHERE id=" + policyId);
             return ResponseEntity.ok("✅ Полисът е изтрит успешно!");
         } catch (SQLException e) {

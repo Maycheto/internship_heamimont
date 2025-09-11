@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DataBaseRepository extends JpaRepository<DataBaseEntry, Long> {
     Optional<DataBaseEntry> findByDbName(String dbName);
 
-    List<DataBaseEntry> findByUserId(Long userId); // важното!
+    List<DataBaseEntry> findByUserId(Long userId); 
 }

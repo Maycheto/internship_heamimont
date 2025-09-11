@@ -9,14 +9,14 @@
 
 <h1>База: <span th:text="${dbName}">DatabaseName</span></h1>
 
-<!-- Създаване на ново портфолио -->
+<!-- Create new portfolio -->
 <div class="mb-3">
   <input type="text" id="portfolioName" placeholder="Име на портфолио" class="form-control mb-2" />
   <button id="createPortfolioBtn" class="btn btn-primary">Създай портфолио</button>
   <p id="message" style="color:red;"></p>
 </div>
 
-<!-- Списък на портфолиата -->
+<!-- List portfolios -->
 <h2 class="mt-4">Портфолиа</h2>
 <ul class="list-group" id="portfolioList">
   <li th:if="${#lists.isEmpty(portfolios)}" class="list-group-item text-muted">Няма създадени портфолиа.</li>
@@ -30,47 +30,52 @@
   </li>
 </ul>
 
+<!-- JS script portfolios - create and delete -->
+
 <script>
-async function deletePortfolio(id, dbName) {
-  if (!confirm("Сигурни ли сте, че искате да изтриете портфолиото?")) return;
-  const response = await fetch(`/db/${dbName}/portfolio/delete/${id}`, { method: "POST" });
-  const text = await response.text();
-  if(response.ok){
-    alert(text);
-    location.reload();
-  } else {
-    alert("Грешка: " + text);
-  }
-}
+  const dbName = '[[${dbName}]]';
 
-document.getElementById("createPortfolioBtn").addEventListener("click", async () => {
-  const portfolioName = document.getElementById("portfolioName").value.trim();
-  const message = document.getElementById("message");
-  message.textContent = "";
-  const dbName = "[[${dbName}]]";
+  async function deletePortfolio(id) {
+    if (!confirm("Сигурни ли сте, че искате да изтриете портфолиото?")) return;
 
-  if (!portfolioName) {
-    message.textContent = "Моля, въведете име на портфолио!";
-    return;
-  }
-
-  try {
-    const response = await fetch(`/db/${dbName}/portfolio/add?portfolioName=${encodeURIComponent(portfolioName)}`, { method: "POST" });
+    const response = await fetch(`/db/${dbName}/portfolio/delete/${id}`, { method: "POST" });
     const text = await response.text();
-    if(response.ok){
-      message.style.color = "green";
-      message.textContent = text;
-      setTimeout(() => location.reload(), 500);
+
+    if (response.ok) {
+      alert(text);
+      location.reload();
     } else {
-      message.style.color = "red";
-      message.textContent = text;
+      alert("Грешка: " + text);
     }
-  } catch(err){
-    message.style.color = "red";
-    message.textContent = "Грешка при свързване със сървъра!";
-    console.error(err);
   }
-});
+
+  document.getElementById("createPortfolioBtn").addEventListener("click", async () => {
+    const portfolioName = document.getElementById("portfolioName").value.trim();
+    const message = document.getElementById("message");
+    message.textContent = "";
+
+    if (!portfolioName) {
+      message.textContent = "Моля, въведете име на портфолио!";
+      return;
+    }
+
+    try {
+      const response = await fetch(`/db/${dbName}/portfolio/add?portfolioName=${encodeURIComponent(portfolioName)}`, { method: "POST" });
+      const text = await response.text();
+      if (response.ok) {
+        message.style.color = "green";
+        message.textContent = text;
+        setTimeout(() => location.reload(), 500);
+      } else {
+        message.style.color = "red";
+        message.textContent = text;
+      }
+    } catch (err) {
+      message.style.color = "red";
+      message.textContent = "Грешка при свързване със сървъра!";
+      console.error(err);
+    }
+  });
 </script>
 
 </body>

@@ -9,14 +9,14 @@
 
 <h1>Портфолио: <span th:text="${portfolioId}"></span> в база <span th:text="${dbName}"></span></h1>
 
-<!-- Форма за добавяне на акаунт -->
+<!-- Create new account -->
 <div class="mb-3">
   <input type="text" id="accName" placeholder="Име на акаунт" class="form-control mb-2" />
   <button id="createAccountBtn" class="btn btn-primary">Създай акаунт</button>
   <p id="message" style="color:red;"></p>
 </div>
 
-<!-- Списък с акаунтите -->
+<!-- List accounts -->
 <h2 class="mt-4">Акаунти</h2>
 <ul class="list-group" id="accountList">
   <li th:if="${#lists.isEmpty(accounts)}" class="list-group-item text-muted">
@@ -25,16 +25,19 @@
   <li th:each="a : ${accounts}" class="list-group-item d-flex justify-content-between align-items-center">
     <span th:text="${a.acc_name}">AccountName</span>
     <div>
-      <!-- Ако имаш нужда от View за локации и полици -->
-    <a th:href="@{'/db/' + ${dbName} + '/portfolio/' + ${portfolioId} + '/account/' + ${a.id} + '/view'}" 
-      class="btn btn-sm btn-success">View</a>
+      <a th:href="@{'/db/' + ${dbName} + '/portfolio/' + ${portfolioId} + '/account/' + ${a.id} + '/view'}" 
+         class="btn btn-sm btn-success">View</a>
       <button type="button" class="btn btn-sm btn-danger"
               th:attr="onclick=|deleteAccount('${a.id}')|">Delete</button>
     </div>
   </li>
 </ul>
 
-<script>
+
+<script th:inline="javascript">
+  const dbName = [[${dbName}]];
+  const portfolioId = [[${portfolioId}]];
+
 document.getElementById("createAccountBtn").addEventListener("click", async () => {
   const accName = document.getElementById("accName").value.trim();
   const message = document.getElementById("message");
@@ -46,7 +49,7 @@ document.getElementById("createAccountBtn").addEventListener("click", async () =
   }
 
   try {
-    const response = await fetch(`/db/${'[[${dbName}]]'}/portfolio/${'[[${portfolioId}]]'}/account/add?accName=${encodeURIComponent(accName)}`, {
+    const response = await fetch(`/db/${dbName}/portfolio/${portfolioId}/account/add?accName=${encodeURIComponent(accName)}`, {
       method: "POST"
     });
     const text = await response.text();
@@ -68,7 +71,7 @@ document.getElementById("createAccountBtn").addEventListener("click", async () =
 
 async function deleteAccount(id) {
   if (!confirm("Сигурни ли сте, че искате да изтриете акаунта?")) return;
-  const response = await fetch(`/db/${'[[${dbName}]]'}/portfolio/${'[[${portfolioId}]]'}/account/delete/${id}`, { method: "POST" });
+  const response = await fetch(`/db/${dbName}/portfolio/${portfolioId}/account/delete/${id}`, { method: "POST" });
   const text = await response.text();
   if (response.ok) {
     alert(text);

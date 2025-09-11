@@ -28,7 +28,7 @@ public class PortfolioController {
     private final String pgUser = "postgres";
     private final String pgPassword = "0884999440";
 
-    // Списък на портфолиата
+    // List portfolios
     @GetMapping
     public String listPortfolios(@PathVariable String dbName, Model model) {
         String dbUrl = "jdbc:postgresql://localhost:5432/" + dbName;
@@ -54,7 +54,7 @@ public class PortfolioController {
 
         model.addAttribute("dbName", dbName);
         model.addAttribute("portfolios", portfolios);
-        return "db-view"; // template за показване на портфолиа
+        return "db-view"; 
     }
 
     @GetMapping("/view/{portfolioId}")
@@ -85,12 +85,12 @@ public class PortfolioController {
         model.addAttribute("dbName", dbName);
         model.addAttribute("portfolioId", portfolioId);
         model.addAttribute("accounts", accounts);
-        return "portfolio-view"; // template за показване на акаунтите
+        return "portfolio-view"; 
     }
 
 
 
-    // Добавяне на портфолио
+    // Add new portfolio
     @PostMapping("/add")
     @ResponseBody
     public ResponseEntity<String> addPortfolio(@PathVariable String dbName,
@@ -99,6 +99,13 @@ public class PortfolioController {
         try (Connection conn = DriverManager.getConnection(dbUrl, pgUser, pgPassword);
              Statement stmt = conn.createStatement()) {
 
+            try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM portfolio WHERE portfolio_name='" + portfolioName + "'")) {
+                rs.next();
+                if (rs.getInt(1) > 0) {
+                    return ResponseEntity.badRequest().body("❌ Портфолио с това име вече съществува!");
+                }
+            }
+
             stmt.executeUpdate("INSERT INTO portfolio (portfolio_name) VALUES ('" + portfolioName + "')");
             return ResponseEntity.ok("✅ Портфолиото е добавено успешно!");
         } catch (SQLException e) {
@@ -106,7 +113,7 @@ public class PortfolioController {
         }
     }
 
-    // Изтриване на портфолио
+    // Delete portfolio
     @PostMapping("/delete/{portfolioId}")
     @ResponseBody
     public ResponseEntity<String> deletePortfolio(@PathVariable String dbName,
