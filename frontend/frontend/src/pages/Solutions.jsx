@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./solutions.css"; // separate CSS file for styling solutions page
+import "./solutions.css";
 
 export default function SolutionsPage() {
   const navigate = useNavigate();
@@ -10,9 +10,17 @@ export default function SolutionsPage() {
     window.location.reload();
   };
 
+  // Disable page scroll while on Solutions
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <div className="homepage">
-      {/* Header */}
+    <div className="homepage solutions-page-bg">
       <header className="header">
         <div
           className="logo"
@@ -40,7 +48,6 @@ export default function SolutionsPage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="solutions-content">
         <div className="solutions-box">
           <h1>Our Solutions</h1>

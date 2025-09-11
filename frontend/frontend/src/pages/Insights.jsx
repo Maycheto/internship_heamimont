@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./insights.css";
 
@@ -7,11 +7,20 @@ export default function InsightsPage() {
 
   const handleLogoClick = () => {
     navigate("/");
-    window.location.reload();
+    window.location.reload(); 
   };
 
+  // Disable page scroll while on Insights
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <div className="homepage">
+    <div className="insights-page">
       <header className="header">
         <div
           className="logo"

@@ -1,0 +1,75 @@
+.about-content {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-page-bg {
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 40%, #ffffff 100%);
+  min-height: 900px;
+  width: 1280px;      
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.about-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-hero h1 {
+  font-family: "Podkova", serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.about-hero p {
+  font-family: "Podkova", serif;
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.why-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.why-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: hsl(150, 100%, 87%);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease;
+}
+
+.why-card:hover {
+  transform: rotate(-1deg) scale(1.02);
+}
+
+.why-card:nth-child(even) {
+  flex-direction: row-reverse;
+  background: #f2fbf8;
+}
+
+.why-text h2 {
+  font-family: "Podkova", serif;    
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.why-text p {
+  font-family: "Podkova", serif;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+.why-icon {
+  font-size: 3rem;
+}

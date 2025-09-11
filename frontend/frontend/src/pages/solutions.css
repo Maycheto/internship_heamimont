@@ -1,8 +1,21 @@
+
+
 .solutions-content {
   padding: 4rem 2rem;
 }
 
+.homepage{
+  font-family: "Podkova", serif;
+}
+
+.solutions-page-bg {
+  background: linear-gradient(180deg, #ffffff 0%, #eefbf5 40%, #ffffff 100%);
+  min-height: 100vh;
+  width: 1280px;
+}
+
 .solutions-box {
+  margin-top: 40px;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -14,28 +27,38 @@
 }
 
 .solution-card {
-  background: #ffffff;
+  margin-top: 20px;/**/
+  background: #ffe4f0; 
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .solution-card h2 {
+  font-family: podkova, serif;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .solution-card p {
-  font-size: 1rem;
+  font-family: podkova, serif;
+  font-size: 1rem; 
   margin-bottom: 1rem;
 }
 
 .solution-card a {
-  color: hsl(165, 100%, 40%);
+  font-family: podkova, serif;
+  color: #f292c2; 
   font-weight: 600;
   text-decoration: none;
 }
 
 .solution-card a:hover {
+  font-family: podkova, serif;
   color: hsl(165, 100%, 50%);
 }
