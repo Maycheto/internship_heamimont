@@ -6,6 +6,8 @@ import Solutions from "./pages/Solutions";
 import AboutUs from "./pages/AboutUs";
 import Insights from "./pages/Insights";
 import SignUp from "./sign up and login/SignUp";
+import DatabaseManagement from "./pages/DatabaseManagement";
+import Portfolios from "./pages/Portfolios";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/insights" element={<Insights />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/database-management" element={<DatabaseManagement />} />
+        <Route path="/portfolios/:databaseId" element={<Portfolios />} />
         <Route path="*" element={<Homepage />} />
       </Routes>
     </BrowserRouter>

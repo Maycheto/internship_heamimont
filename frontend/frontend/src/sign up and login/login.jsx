@@ -21,6 +21,11 @@ const LoginPageCSS = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login attempt:", { email, password, rememberMe });
+    
+    // Mock successful login - in real app, this would be API call
+    localStorage.setItem('token', 'mock-jwt-token');
+    localStorage.setItem('userEmail', email);
+    navigate('/database-management');
   };
 
   return (
