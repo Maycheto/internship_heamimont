@@ -1,95 +1,94 @@
 import React, { useState, useEffect } from 'react';
-import './Portfolios.css';
+import './Accounts.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const Portfolios = () => {
-  const { databaseId } = useParams();
+const Accounts = () => {
+  const { portfolioId } = useParams();
   const navigate = useNavigate();
-  const [portfolios, setPortfolios] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showMenuModal, setShowMenuModal] = useState(false);
-  const [selectedPortfolio, setSelectedPortfolio] = useState(null);
-  const [newPortfolio, setNewPortfolio] = useState({ name: '' });
+  const [selectedAccount, setSelectedAccount] = useState(null);
+  const [newAccount, setNewAccount] = useState({ name: '', type: '' });
   const [searchTerm, setSearchTerm] = useState('');
-  const [databaseName, setDatabaseName] = useState('');
+  const [portfolioName, setPortfolioName] = useState('');
 
   useEffect(() => {
-    fetchPortfolios();
-    fetchDatabaseName();
-  }, [databaseId]);
+    fetchAccounts();
+    fetchPortfolioName();
+  }, [portfolioId]);
 
-  const fetchPortfolios = async () => {
+  const fetchAccounts = async () => {
     try {
       setLoading(true);
       // Mock data
-      setPortfolios([
-        { id: 1, name: 'Portfolio 1', createdAt: '2024-01-15' },
-        { id: 2, name: 'Portfolio 2', createdAt: '2024-01-20' },
-        { id: 3, name: 'Portfolio 3', createdAt: '2024-01-25' }
+      setAccounts([
+        { id: 1, name: 'Account 1', type: 'Investment', createdAt: '2024-01-15' },
+        { id: 2, name: 'Account 2', type: 'Savings', createdAt: '2024-01-20' },
+        { id: 3, name: 'Account 3', type: 'Retirement', createdAt: '2024-01-25' }
       ]);
     } catch (error) {
-      console.error('Error fetching portfolios:', error);
+      console.error('Error fetching accounts:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchDatabaseName = async () => {
+  const fetchPortfolioName = async () => {
     try {
       // In a real app, you would fetch this from your API
-      const databaseNames = {
-        '26': 'Somerr',
-        '45': 'Kalifornia67',
-        '123': 'California34',
-        '78': 'nikel',
-        '1': 'Slovenia add'
+      const portfolioNames = {
+        '1': 'Portfolio 1',
+        '2': 'Portfolio 2',
+        '3': 'Portfolio 3'
       };
       
-      setDatabaseName(databaseNames[databaseId] || `Database ${databaseId}`);
+      setPortfolioName(portfolioNames[portfolioId] || `Portfolio ${portfolioId}`);
     } catch (error) {
-      console.error('Error fetching database name:', error);
-      setDatabaseName(`Database ${databaseId}`);
+      console.error('Error fetching portfolio name:', error);
+      setPortfolioName(`Portfolio ${portfolioId}`);
     }
   };
 
-  const handleAddPortfolio = async (e) => {
+  const handleAddAccount = async (e) => {
     e.preventDefault();
     try {
-      const newId = portfolios.length > 0 ? Math.max(...portfolios.map(p => p.id)) + 1 : 1;
-      setPortfolios([...portfolios, { 
+      const newId = accounts.length > 0 ? Math.max(...accounts.map(a => a.id)) + 1 : 1;
+      setAccounts([...accounts, { 
         id: newId, 
-        name: newPortfolio.name, 
+        name: newAccount.name, 
+        type: newAccount.type,
         createdAt: new Date().toLocaleDateString('en-GB')
       }]);
       
       setShowAddModal(false);
-      setNewPortfolio({ name: '' });
+      setNewAccount({ name: '', type: '' });
     } catch (error) {
-      console.error('Error adding portfolio:', error);
+      console.error('Error adding account:', error);
     }
   };
 
-  const handleDeletePortfolio = () => {
-    if (!selectedPortfolio) return;
+  const handleDeleteAccount = () => {
+    if (!selectedAccount) return;
     
-    setPortfolios(portfolios.filter(p => p.id !== selectedPortfolio.id));
+    setAccounts(accounts.filter(a => a.id !== selectedAccount.id));
     setShowDeleteModal(false);
-    setSelectedPortfolio(null);
+    setSelectedAccount(null);
   };
 
-  const handleViewPortfolio = (portfolio) => {
-    navigate(`/accounts/${portfolio.id}`);
+  const handleViewAccount = (account) => {
+    navigate(`/account-details/${account.id}`);
   };
 
-  const filteredPortfolios = portfolios.filter(portfolio => 
-    portfolio.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    portfolio.id.toString().includes(searchTerm)
+  const filteredAccounts = accounts.filter(account => 
+    account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    account.id.toString().includes(searchTerm)
   );
 
   return (
-    <div className="portfolios">
+    <div className="accounts">
       <header className="header">
         <div className="logo">Pink</div>
         <nav className="nav">
@@ -125,8 +124,8 @@ const Portfolios = () => {
       <main className="main-content">
         <div className="content-header">
           <div className="title-section">
-            <h1 className="page-title">Portfolios</h1>
-            <p className="database-name">Database: {databaseName}</p>
+            <h1 className="page-title">Accounts</h1>
+            <p className="portfolio-name">Portfolio: {portfolioName}</p>
           </div>
           <div className="search-container">
             <input
@@ -142,15 +141,15 @@ const Portfolios = () => {
             className="add-button"
             onClick={() => setShowAddModal(true)}
           >
-            Add New Portfolio
+            Add New Account
           </button>
         </div>
 
         <button 
           className="back-button"
-          onClick={() => navigate('/database-management')}
+          onClick={() => navigate('/portfolios')}
         >
-          ← Back to Databases
+          ← Back to Portfolios
         </button>
 
         <div className="table-container">
@@ -159,6 +158,7 @@ const Portfolios = () => {
               <tr>
                 <th>№</th>
                 <th>Name</th>
+                <th>Type</th>
                 <th>Created Date</th>
                 <th>Actions</th>
               </tr>
@@ -166,31 +166,32 @@ const Portfolios = () => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="4" className="loading-cell">Loading portfolios...</td>
+                  <td colSpan="5" className="loading-cell">Loading accounts...</td>
                 </tr>
-              ) : filteredPortfolios.length === 0 ? (
+              ) : filteredAccounts.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="empty-cell">
-                    {portfolios.length === 0 ? "No portfolios found. Create your first portfolio to get started." : "No matching portfolios found."}
+                  <td colSpan="5" className="empty-cell">
+                    {accounts.length === 0 ? "No accounts found. Create your first account to get started." : "No matching accounts found."}
                   </td>
                 </tr>
               ) : (
-                filteredPortfolios.map(portfolio => (
-                  <tr key={portfolio.id}>
-                    <td>{portfolio.id}</td>
-                    <td>{portfolio.name}</td>
-                    <td>{portfolio.createdAt}</td>
+                filteredAccounts.map(account => (
+                  <tr key={account.id}>
+                    <td>{account.id}</td>
+                    <td>{account.name}</td>
+                    <td>{account.type}</td>
+                    <td>{account.createdAt}</td>
                     <td className="actions">
                       <button 
                         className="action-btn view-btn"
-                        onClick={() => handleViewPortfolio(portfolio)}
+                        onClick={() => handleViewAccount(account)}
                       >
                         View
                       </button>
                       <button 
                         className="action-btn delete-btn"
                         onClick={() => {
-                          setSelectedPortfolio(portfolio);
+                          setSelectedAccount(account);
                           setShowDeleteModal(true);
                         }}
                       >
@@ -205,27 +206,42 @@ const Portfolios = () => {
         </div>
       </main>
 
-      {/* Add Portfolio Modal */}
+      {/* Add Account Modal */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>Add New Portfolio</h2>
-            <form onSubmit={handleAddPortfolio}>
+            <h2>Add New Account</h2>
+            <form onSubmit={handleAddAccount}>
               <div className="form-group">
-                <label htmlFor="portfolioName">Portfolio Name:</label>
+                <label htmlFor="accountName">Account Name:</label>
                 <input
                   type="text"
-                  id="portfolioName"
-                  value={newPortfolio.name}
-                  onChange={(e) => setNewPortfolio({...newPortfolio, name: e.target.value})}
+                  id="accountName"
+                  value={newAccount.name}
+                  onChange={(e) => setNewAccount({...newAccount, name: e.target.value})}
                   required
                 />
+              </div>
+              <div className="form-group">
+                <label htmlFor="accountType">Account Type:</label>
+                <select
+                  id="accountType"
+                  value={newAccount.type}
+                  onChange={(e) => setNewAccount({...newAccount, type: e.target.value})}
+                  required
+                >
+                  <option value="">Select Type</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Savings">Savings</option>
+                  <option value="Retirement">Retirement</option>
+                  <option value="Checking">Checking</option>
+                </select>
               </div>
               <div className="modal-actions">
                 <button type="button" onClick={() => setShowAddModal(false)}>
                   Cancel
                 </button>
-                <button type="submit">Create Portfolio</button>
+                <button type="submit">Create Account</button>
               </div>
             </form>
           </div>
@@ -236,10 +252,10 @@ const Portfolios = () => {
         <div className="modal-overlay" onClick={() => setShowDeleteModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>Confirm Delete</h2>
-            <p>Are you sure you want to delete the portfolio "{selectedPortfolio?.name}"?</p>
+            <p>Are you sure you want to delete the account "{selectedAccount?.name}"?</p>
             <div className="modal-actions">
               <button onClick={() => setShowDeleteModal(false)}>Cancel</button>
-              <button onClick={handleDeletePortfolio} className="delete-confirm">
+              <button onClick={handleDeleteAccount} className="delete-confirm">
                 Delete
               </button>
             </div>
@@ -250,4 +266,4 @@ const Portfolios = () => {
   );
 };
 
-export default Portfolios;
+export default Accounts;

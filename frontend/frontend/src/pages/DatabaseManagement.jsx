@@ -108,7 +108,6 @@ const DatabaseManagement = () => {
         alert(result);
         setShowDeleteModal(false);
         setSelectedDatabase(null);
-        fetchDatabases(); // Refresh the list
       } else {
         const error = await response.text();
         alert(error);
@@ -145,7 +144,7 @@ const DatabaseManagement = () => {
 
 
 
-  
+
 
   return (
     <div className="database-management">
@@ -252,42 +251,59 @@ const DatabaseManagement = () => {
         </div>
       </main>
 
-      {/* Add Database Modal */}
       {showAddModal && (
-        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>Add New Database</h2>
-            <form onSubmit={handleAddDatabase}>
-              <div className="form-group">
-                <label htmlFor="dbName">Database Name:</label>
-                <input
-                  type="text"
-                  id="dbName"
-                  value={newDatabase.name}
-                  onChange={(e) => setNewDatabase({...newDatabase, name: e.target.value})}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="dbNumber">Database Number:</label>
-                <input
-                  type="text"
-                  id="dbNumber"
-                  value={newDatabase.number}
-                  onChange={(e) => setNewDatabase({...newDatabase, number: e.target.value})}
-                  placeholder="Optional"
-                />
-              </div>
-              <div className="modal-actions">
-                <button type="button" onClick={() => setShowAddModal(false)}>
-                  Cancel
-                </button>
-                <button type="submit">Create Database</button>
-              </div>
-            </form>
-          </div>
+  <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
+    <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <h2>Add New Database</h2>
+      <form onSubmit={handleAddDatabase}>
+        <div className="form-group">
+          <label htmlFor="dbName">Database Name:</label>
+          <input
+            type="text"
+            id="dbName"
+            value={newDatabase.name}
+            onChange={(e) =>
+              setNewDatabase({ ...newDatabase, name: e.target.value })
+            }
+            required
+          />
         </div>
-      )}
+        <div className="form-group">
+          <label htmlFor="dbNumber">Database Number:</label>
+          <input
+            type="text"
+            id="dbNumber"
+            value={newDatabase.number}
+            onChange={(e) =>
+              setNewDatabase({ ...newDatabase, number: e.target.value })
+            }
+            placeholder="Optional"
+          />
+        </div>
+
+        {/* New Upload Field */}
+        <div className="form-group">
+          <label htmlFor="dbFile">Upload File:</label>
+          <input
+            type="file"
+            id="dbFile"
+            onChange={(e) =>
+              setNewDatabase({ ...newDatabase, file: e.target.files[0] })
+            }
+          />
+        </div>
+
+        <div className="modal-actions">
+          <button type="button" onClick={() => setShowAddModal(false)}>
+            Cancel
+          </button>
+          <button type="submit">Create Database</button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+
 
       {/* Menu Modal */}
       {showMenuModal && (
@@ -309,7 +325,6 @@ const DatabaseManagement = () => {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="modal-overlay" onClick={() => setShowDeleteModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -325,7 +340,6 @@ const DatabaseManagement = () => {
         </div>
       )}
 
-      {/* Download Confirmation Modal */}
       {showDownloadModal && (
         <div className="modal-overlay" onClick={() => setShowDownloadModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
