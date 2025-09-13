@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Accounts.css';
+import './accounts.css';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Accounts = () => {
   const { portfolioId } = useParams();
@@ -23,12 +24,8 @@ const Accounts = () => {
   const fetchAccounts = async () => {
     try {
       setLoading(true);
-      // Mock data
-      setAccounts([
-        { id: 1, name: 'Account 1', type: 'Investment', createdAt: '2024-01-15' },
-        { id: 2, name: 'Account 2', type: 'Savings', createdAt: '2024-01-20' },
-        { id: 3, name: 'Account 3', type: 'Retirement', createdAt: '2024-01-25' }
-      ]);
+
+  
     } catch (error) {
       console.error('Error fetching accounts:', error);
     } finally {
@@ -36,9 +33,11 @@ const Accounts = () => {
     }
   };
 
+  const location = useLocation();
+  const databaseId = location.state?.databaseId || 1;
+
   const fetchPortfolioName = async () => {
     try {
-      // In a real app, you would fetch this from your API
       const portfolioNames = {
         '1': 'Portfolio 1',
         '2': 'Portfolio 2',
@@ -86,6 +85,8 @@ const Accounts = () => {
     account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     account.id.toString().includes(searchTerm)
   );
+
+  
 
   return (
     <div className="accounts">
@@ -146,10 +147,9 @@ const Accounts = () => {
         </div>
 
         <button 
-          className="back-button"
-          onClick={() => navigate('/portfolios')}
-        >
-          ← Back to Portfolios
+            className="back-button"
+            onClick={() => navigate(`/portfolios/${databaseId}`)}>
+            ← Back to Portfolios
         </button>
 
         <div className="table-container">
@@ -206,7 +206,6 @@ const Accounts = () => {
         </div>
       </main>
 
-      {/* Add Account Modal */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -221,21 +220,6 @@ const Accounts = () => {
                   onChange={(e) => setNewAccount({...newAccount, name: e.target.value})}
                   required
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="accountType">Account Type:</label>
-                <select
-                  id="accountType"
-                  value={newAccount.type}
-                  onChange={(e) => setNewAccount({...newAccount, type: e.target.value})}
-                  required
-                >
-                  <option value="">Select Type</option>
-                  <option value="Investment">Investment</option>
-                  <option value="Savings">Savings</option>
-                  <option value="Retirement">Retirement</option>
-                  <option value="Checking">Checking</option>
-                </select>
               </div>
               <div className="modal-actions">
                 <button type="button" onClick={() => setShowAddModal(false)}>

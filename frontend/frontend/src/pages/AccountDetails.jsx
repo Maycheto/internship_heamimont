@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './location_and_policies.css';
+import './AccountDetails.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const AccountDetails = () => {
-  const { accountId } = useParams();
+  const { accountId } = useParams(); 
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('locations');
   const [locations, setLocations] = useState([]);
@@ -22,22 +22,7 @@ const AccountDetails = () => {
 
   const fetchData = async () => {
     try {
-      setLoading(true);
-      if (activeTab === 'locations') {
-        // Mock locations data
-        setLocations([
-          { id: 1, name: 'New York Office', address: '123 Main St, NY', createdAt: '2024-01-15' },
-          { id: 2, name: 'London Branch', address: '456 Oxford St, London', createdAt: '2024-01-20' },
-          { id: 3, name: 'Tokyo Office', address: '789 Shibuya, Tokyo', createdAt: '2024-01-25' }
-        ]);
-      } else {
-        // Mock policies data
-        setPolicies([
-          { id: 1, name: 'Privacy Policy', description: 'Data protection guidelines', createdAt: '2024-01-15' },
-          { id: 2, name: 'Security Policy', description: 'Infrastructure security rules', createdAt: '2024-01-20' },
-          { id: 3, name: 'Access Policy', description: 'User access controls', createdAt: '2024-01-25' }
-        ]);
-      }
+      
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -47,7 +32,6 @@ const AccountDetails = () => {
 
   const fetchAccountName = async () => {
     try {
-      // In a real app, you would fetch this from your API
       const accountNames = {
         '1': 'Account 1',
         '2': 'Account 2',
@@ -131,7 +115,7 @@ const AccountDetails = () => {
           </div>
           <button 
             className="back-button"
-            onClick={() => navigate('/accounts')}
+            onClick={() => navigate('/accounts/' + accountId.split('-')[0])} 
           >
             ← Back to Accounts
           </button>
@@ -209,7 +193,6 @@ const AccountDetails = () => {
         </div>
       </main>
 
-      {/* Add Item Modal */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -248,14 +231,14 @@ const AccountDetails = () => {
         </div>
       )}
 
-     {showDeleteModal && (
+      {showDeleteModal && (
         <div className="modal-overlay" onClick={() => setShowDeleteModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>Confirm Delete</h2>
-            <p>Are you sure you want to delete the account "{selectedAccount?.name}"?</p>
+            <p>Are you sure you want to delete this {activeTab.slice(0, -1)} "{selectedItem?.name}"?</p>
             <div className="modal-actions">
               <button onClick={() => setShowDeleteModal(false)}>Cancel</button>
-              <button onClick={handleDeleteAccount} className="delete-confirm">
+              <button onClick={handleDeleteItem} className="delete-confirm">
                 Delete
               </button>
             </div>
@@ -266,4 +249,4 @@ const AccountDetails = () => {
   );
 };
 
-export default locations_and_policies;    
+export default AccountDetails;

@@ -1,7 +1,10 @@
 .account-details {
-  min-height: 100vh;
+  min-height: 1000px;
+  width: 1270px;
   background-color: white;
   font-family: podkova, serif;
+  margin-top: 80px;
+
 }
 
 .header {

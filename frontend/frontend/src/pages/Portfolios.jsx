@@ -23,12 +23,6 @@ const Portfolios = () => {
   const fetchPortfolios = async () => {
     try {
       setLoading(true);
-      // Mock data
-      setPortfolios([
-        { id: 1, name: 'Portfolio 1', createdAt: '2024-01-15' },
-        { id: 2, name: 'Portfolio 2', createdAt: '2024-01-20' },
-        { id: 3, name: 'Portfolio 3', createdAt: '2024-01-25' }
-      ]);
     } catch (error) {
       console.error('Error fetching portfolios:', error);
     } finally {
@@ -36,16 +30,10 @@ const Portfolios = () => {
     }
   };
 
+  
+
   const fetchDatabaseName = async () => {
     try {
-      // In a real app, you would fetch this from your API
-      const databaseNames = {
-        '26': 'Somerr',
-        '45': 'Kalifornia67',
-        '123': 'California34',
-        '78': 'nikel',
-        '1': 'Slovenia add'
-      };
       
       setDatabaseName(databaseNames[databaseId] || `Database ${databaseId}`);
     } catch (error) {
